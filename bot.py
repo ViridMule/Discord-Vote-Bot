@@ -116,5 +116,5 @@ async def commands(ctx):
     embed.set_footer(text="Use !help <command> for more info on a specific command.")
     await ctx.send(embed=embed)
 
-# Bot token in """
+# Bot token
 bot.run(BOT_TOKEN)
