@@ -8,8 +8,8 @@ Hosting device requires installations:
   
 Python  
 and libraries:  
-  discord  
-  fuzzywuzzy  
+   discord  
+   fuzzywuzzy  
 
 Installation Help:  
 python3 -m pip install -U discord.py  
