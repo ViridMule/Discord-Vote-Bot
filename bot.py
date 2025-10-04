@@ -101,6 +101,31 @@ async def reset(ctx):
     voting_locked = False
     await ctx.send("The voting poll has been reset. You can now add new movies.")
 
+@bot.command()
+async def remove(ctx, *, movie_name):
+    global movie_options, votes, voting_locked
+
+    if voting_locked:
+        await ctx.send("You cannot remove items after voting has started!")
+        return
+
+    # Case-insensitive search for the movie
+    for i, movie in enumerate(movie_options):
+        if movie.lower() == movie_name.lower():
+            movie_options.pop(i)  # remove from the list
+            
+            # Remove votes for this movie from all users
+            for user_id, user_votes in votes.items():
+                user_votes.discard(i)
+                # Also adjust indices greater than removed movie
+                votes[user_id] = {v-1 if v > i else v for v in user_votes}
+
+            await ctx.send(f"Removed '{movie}' from the list.")
+            return
+
+    await ctx.send(f"'{movie_name}' not found in the list.")
+
+
 
 @bot.command()
 async def commands(ctx):
@@ -113,6 +138,7 @@ async def commands(ctx):
     embed.add_field(name="!lock", value="Locks the string list and starts voting.", inline=False)
     embed.add_field(name="!results", value="Shows the current vote tally.", inline=False)
     embed.add_field(name="!reset", value="Resets the voting poll.", inline=False)
+    embed.add_field(name="!remove", value="Removes list item.", inline=False)
     embed.set_footer(text="Use !help <command> for more info on a specific command.")
     await ctx.send(embed=embed)
 
