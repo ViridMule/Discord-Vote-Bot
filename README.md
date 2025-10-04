@@ -13,4 +13,4 @@ and libraries:
 
 Installation Help:  
 python3 -m pip install -U discord.py  
-python3 -m pip isntall -U fuzzywuzzy[speedup]  
+pip isntall fuzzywuzzy[speedup]  
