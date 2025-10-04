@@ -10,3 +10,8 @@ Python
 and libraries:
   discord
   fuzzywuzzy
+
+Installation Help:
+
+python3 -m pip install -U discord.py
+python3 -m pip isntall -U fuzzywuzzy[speedup]
